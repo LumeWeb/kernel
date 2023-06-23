@@ -11,6 +11,8 @@ import { logLargeObjects } from "./logLargeState.js";
 import { log, logErr } from "./log.js";
 import { handleModuleCall, handleQueryUpdate } from "./queries.js";
 import { KERNEL_DISTRO, KERNEL_VERSION } from "./version.js";
+import { setActivePortals } from "@lumeweb/libweb";
+import { Client } from "@lumeweb/libportal";
 
 // These three functions are expected to have already been declared by the
 // bootloader. They are necessary for getting started and downloading the
@@ -19,6 +21,7 @@ import { KERNEL_DISTRO, KERNEL_VERSION } from "./version.js";
 // The kernel is encouraged to overwrite these functions with new values.
 declare let handleIncomingMessage: (event: MessageEvent) => void;
 declare let handleSkynetKernelRequestOverride: (event: MessageEvent) => void;
+declare let bootloaderPortals: Client[];
 
 // IS_EXTENSION is a boolean that indicates whether or not the kernel is
 // running in a browser extension.
@@ -30,6 +33,9 @@ logLargeObjects();
 
 // Establish the stateful variable for tracking module overrides.
 let moduleOverrideList = {} as any;
+
+// Set up portals based on the instances created in the bootloader
+setActivePortals(bootloaderPortals);
 
 // Write a log that declares the kernel version and distribution.
 log("init", "Lume Web Kernel v" + KERNEL_VERSION + "-" + KERNEL_DISTRO);
