@@ -15,5 +15,9 @@
         "prettier": {
             "singleQuote": false
         }
+    },
+    "variable": {
+        "source": "src"
     }
+}
 }
