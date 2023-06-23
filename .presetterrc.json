@@ -14,6 +14,24 @@
         },
         "prettier": {
             "singleQuote": false
+        },
+        "rollup": {
+            "output": [
+                {
+                    "file": "dist/index.js",
+                    "format": "cjs",
+                    "sourcemap": true,
+                    "inlineDynamicImports": true
+                }
+            ],
+            "plugins": [
+                [
+                    "@apply @rollup/plugin-node-resolve[default]",
+                    {
+                        "browser": true
+                    }
+                ]
+            ]
         }
     },
     "variable": {
