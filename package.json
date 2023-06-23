@@ -22,7 +22,8 @@
     "_id": "@lumeweb/kernel@0.1.0",
     "scripts": {
         "prepare": "presetter bootstrap",
-        "build": "run build"
+        "build": "run build",
+        "clean:rollup": "shx rm -rf dist"
     },
     "dependencies": {
         "@lumeweb/libkmodule": "^0.1.0-develop.4",
