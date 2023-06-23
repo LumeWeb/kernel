@@ -21,7 +21,7 @@
     "_id": "@lumeweb/kernel@0.1.0",
     "scripts": {
         "prepare": "presetter bootstrap",
-        "build": "run bootstrap"
+        "build": "run build"
     },
     "dependencies": {
         "@lumeweb/libkmodule": "^0.1.0-develop.4",
