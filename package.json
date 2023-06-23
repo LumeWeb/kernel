@@ -1,0 +1,28 @@
+{
+    "name": "@lumeweb/kernel",
+    "version": "0.1.0",
+    "main": "lib/index.js",
+    "module": "lib/index.mjs",
+    "types": "lib/index.d.ts",
+    "exports": {
+        "require": "./lib/index.js",
+        "import": "./lib/index.mjs"
+    },
+    "devDependencies": {
+        "binconv": "^0.2.0",
+        "presetter": "*",
+        "presetter-preset-esm": "^4.0.1",
+        "presetter-preset-rollup": "^4.0.1"
+    },
+    "readme": "ERROR: No README data found!",
+    "_id": "@lumeweb/kernel@0.1.0",
+    "scripts": {
+        "prepare": "presetter bootstrap",
+        "build": "run bootstrap"
+    },
+    "dependencies": {
+        "@lumeweb/libkmodule": "^0.1.0-develop.4",
+        "@lumeweb/libweb": "0.2.0-develop.3",
+        "binconv": "^0.2.0"
+    }
+}

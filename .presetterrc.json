@@ -1,0 +1,19 @@
+{
+    "preset": [
+        "presetter-preset-rollup",
+        "presetter-preset-esm"
+    ],
+    "config": {
+        "tsconfig": {
+            "compilerOptions": {
+                "lib": [
+                    "ES2021",
+                    "dom"
+                ]
+            }
+        },
+        "prettier": {
+            "singleQuote": false
+        }
+    }
+}
