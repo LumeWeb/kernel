@@ -30,10 +30,17 @@
                     {
                         "browser": true
                     }
-                ], [
+                ],
+                [
                     "@apply @rollup/plugin-wasm[default]",
                     {
                         "targetEnv": "auto-inline"
+                    }
+                ],
+                [
+                    "@apply @rollup/plugin-node-resolve[default]",
+                    {
+                        "preferBuiltins": false
                     }
                 ]
             ]
