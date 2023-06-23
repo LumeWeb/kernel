@@ -25,7 +25,7 @@
     },
     "dependencies": {
         "@lumeweb/libkmodule": "^0.1.0-develop.4",
-        "@lumeweb/libweb": "0.2.0-develop.3",
+        "@lumeweb/libweb": "0.2.0-develop.4",
         "binconv": "^0.2.0"
     }
 }
