@@ -1,21 +1,14 @@
 {
     "name": "@lumeweb/kernel",
     "version": "0.1.0",
-    "main": "lib/index.js",
-    "module": "lib/index.mjs",
-    "types": "lib/index.d.ts",
-    "exports": {
-        "require": "./lib/index.js",
-        "import": "./lib/index.mjs"
-    },
+    "type": "module",
     "devDependencies": {
+        "@lumeweb/presetter-kernel-module-preset": "^0.1.0-develop.26",
         "@rollup/plugin-wasm": "^6.1.3",
         "@semantic-release/changelog": "^6.0.3",
         "@semantic-release/git": "^10.0.1",
         "binconv": "^0.2.0",
         "presetter": "*",
-        "presetter-preset-esm": "^4.0.1",
-        "presetter-preset-rollup": "^4.0.1",
         "semantic-release": "^21.0.5"
     },
     "readme": "ERROR: No README data found!",
@@ -26,8 +19,8 @@
         "clean:rollup": "shx rm -rf dist"
     },
     "dependencies": {
-        "@lumeweb/libkmodule": "^0.1.0-develop.4",
-        "@lumeweb/libweb": "0.2.0-develop.9",
+        "@lumeweb/libkernel": "0.1.0-develop.11",
+        "@lumeweb/libweb": "0.2.0-develop.21",
         "binconv": "^0.2.0"
     }
 }

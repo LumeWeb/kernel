@@ -5,15 +5,13 @@ import { KERNEL_DISTRO, KERNEL_VERSION } from "./version.js";
 import {
   addContextToErr,
   bufToB64,
-  deriveChildKey,
-  downloadObject,
   encodeU64,
   Err,
   objAsString,
-  Portal,
   sha512,
-} from "@lumeweb/libweb";
-import { moduleQuery, presentKeyData } from "@lumeweb/libkmodule";
+} from "@lumeweb/libkernel";
+import { deriveChildKey, downloadObject } from "@lumeweb/libweb";
+import type { moduleQuery, presentKeyData } from "@lumeweb/libkernel/module";
 import { readableStreamToUint8Array } from "binconv";
 
 // WorkerLaunchFn is the type signature of the function that launches the
