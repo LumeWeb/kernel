@@ -268,6 +268,7 @@ function launchWorker(mod: Module): [Worker, Err] {
   const moduleKey = deriveChildKey(activeKey, path);
   const msgData: presentKeyData = {
     key: moduleKey,
+    rootKey: activeKey,
   };
   const msg: moduleQuery = {
     method: "presentKey",
