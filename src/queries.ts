@@ -10,7 +10,7 @@ import {
   objAsString,
   sha512,
 } from "@lumeweb/libkernel";
-import { deriveChildKey, downloadObject } from "@lumeweb/libweb";
+import { deriveChildKey, downloadObject, verifyCid } from "@lumeweb/libweb";
 import type { moduleQuery, presentKeyData } from "@lumeweb/libkernel/module";
 import { readableStreamToUint8Array } from "binconv";
 
@@ -295,14 +295,14 @@ function handleModuleCall(
   }
   if (
     typeof event.data.data.module !== "string" ||
-    event.data.data.module.length != 46
+    !verifyCid(event.data.data.module)
   ) {
     logErr("moduleCall", "received moduleCall with malformed module");
     respondErr(
       event,
       messagePortal,
       isWorker,
-      "'module' field in moduleCall is expected to be a base64 skylink",
+      "'module' field in moduleCall is expected to be a base58 encoded blake3 hash + filesize",
     );
     return;
   }
