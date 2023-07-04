@@ -219,6 +219,14 @@ async function createModule(
       return launchWorker(mod);
     },
   };
+
+  // Start worker
+  const [worker, err] = mod.launchWorker();
+  if (err !== null) {
+    return [{} as Module, addContextToErr(err, "unable to launch worker")];
+  }
+  mod.worker = worker;
+
   return [mod, null];
 }
 
