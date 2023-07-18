@@ -16,8 +16,8 @@
         "clean:rollup": "shx rm -rf dist"
     },
     "dependencies": {
-        "@lumeweb/libkernel": "0.1.0-develop.16",
-        "@lumeweb/libweb": "0.2.0-develop.22",
+        "@lumeweb/libkernel": "0.1.0-develop.19",
+        "@lumeweb/libweb": "0.2.0-develop.26",
         "binconv": "^0.2.0"
     }
 }
