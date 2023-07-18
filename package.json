@@ -3,10 +3,7 @@
     "version": "0.1.0",
     "type": "module",
     "devDependencies": {
-        "@lumeweb/presetter-kernel-module-preset": "^0.1.0-develop.26",
-        "@rollup/plugin-wasm": "^6.1.3",
-        "@semantic-release/changelog": "^6.0.3",
-        "@semantic-release/git": "^10.0.1",
+        "@lumeweb/presetter-kernel-module-preset": "^0.1.0-develop.43",
         "binconv": "^0.2.0",
         "presetter": "*",
         "semantic-release": "^21.0.5"
@@ -19,8 +16,8 @@
         "clean:rollup": "shx rm -rf dist"
     },
     "dependencies": {
-        "@lumeweb/libkernel": "0.1.0-develop.11",
-        "@lumeweb/libweb": "0.2.0-develop.21",
+        "@lumeweb/libkernel": "0.1.0-develop.16",
+        "@lumeweb/libweb": "0.2.0-develop.22",
         "binconv": "^0.2.0"
     }
 }
