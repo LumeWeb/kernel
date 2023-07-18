@@ -13,7 +13,7 @@
     "scripts": {
         "prepare": "presetter bootstrap",
         "build": "run build",
-        "clean:rollup": "shx rm -rf dist"
+        "semantic-release": "semantic-release"
     },
     "dependencies": {
         "@lumeweb/libkernel": "0.1.0-develop.19",
