@@ -269,6 +269,8 @@ function launchWorker(mod: Module): [Worker, Err] {
   const msgData: presentKeyData = {
     key: moduleKey,
     rootPrivateKey: activeKey,
+    // @ts-ignore
+    rootKey: activeKey,
   };
   const msg: moduleQuery = {
     method: "presentKey",
