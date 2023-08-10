@@ -10,7 +10,11 @@ import {
   objAsString,
   sha512,
 } from "@lumeweb/libkernel";
-import { deriveChildKey, downloadObject, verifyCid } from "@lumeweb/libweb";
+import {
+  deriveChildKey,
+  downloadSmallObject,
+  verifyCid,
+} from "@lumeweb/libweb";
 import type { moduleQuery, presentKeyData } from "@lumeweb/libkernel/module";
 import { readableStreamToUint8Array } from "binconv";
 
@@ -462,7 +466,7 @@ function handleModuleCall(
     // TODO: Check localStorage for the module.
 
     // Download the code for the worker.
-    const [moduleData, errDS] = await downloadObject(finalModule);
+    const [moduleData, errDS] = await downloadSmallObject(finalModule);
     if (errDS !== null) {
       const err = addContextToErr(errDS, "unable to load module");
       respondErr(event, messagePortal, isWorker, err);
