@@ -8,9 +8,7 @@
             "name": "@lumeweb/kernel",
             "version": "0.1.0-develop.1",
             "dependencies": {
-                "@lumeweb/libkernel": "0.1.0-develop.19",
-                "@lumeweb/libweb": "0.2.0-develop.26",
-                "binconv": "^0.2.0"
+                "@lumeweb/libkernel": "0.1.0-develop.35"
             },
             "devDependencies": {
                 "@lumeweb/presetter-kernel-module-preset": "^0.1.0-develop.43",
@@ -1692,24 +1690,13 @@
             }
         },
         "node_modules/@lumeweb/libkernel": {
-            "version": "0.1.0-develop.19",
-            "resolved": "https://registry.npmjs.org/@lumeweb/libkernel/-/libkernel-0.1.0-develop.19.tgz",
-            "integrity": "sha512-m0P556M901JJMRblABxkEYDXpBvaMF+zrkczj51+ARWaoGyItt98+OOOP3ldsjW3A/iXhgetxeYIDlzzKyLKfA==",
+            "version": "0.1.0-develop.35",
+            "resolved": "https://registry.npmjs.org/@lumeweb/libkernel/-/libkernel-0.1.0-develop.35.tgz",
+            "integrity": "sha512-/K2Yrcjus8NnJ9z+EdwqLHM3EPegESPcgFL2TW1qCpNzN57LeGBv7z4uuoFpZRbnrxuQDq45YmEySvk8lBOoTQ==",
             "dependencies": {
-                "@lumeweb/libweb": "0.2.0-develop.25",
-                "emittery": "^1.0.1"
-            }
-        },
-        "node_modules/@lumeweb/libkernel/node_modules/@lumeweb/libweb": {
-            "version": "0.2.0-develop.25",
-            "resolved": "https://registry.npmjs.org/@lumeweb/libweb/-/libweb-0.2.0-develop.25.tgz",
-            "integrity": "sha512-jeVyqBzSVoIdwmDX2Sh0yfJ8tDhPqAMMrW+HIifWx8RmaYx73iF3VjO8eFfIwZhHc+udhhkLLQi3+gFF/p0Xpw==",
-            "dependencies": {
-                "@lumeweb/community-portals": "^0.1.0-develop.6",
-                "@lumeweb/libportal": "^0.2.0-develop.15",
-                "@lumeweb/node-library-preset": "0.2.7",
-                "@noble/curves": "^1.1.0",
-                "@noble/hashes": "^1.3.1"
+                "@lumeweb/libweb": "0.2.0-develop.30",
+                "emittery": "^1.0.1",
+                "p-defer": "^4.0.0"
             }
         },
         "node_modules/@lumeweb/libkernel/node_modules/emittery": {
@@ -1724,9 +1711,9 @@
             }
         },
         "node_modules/@lumeweb/libportal": {
-            "version": "0.2.0-develop.16",
-            "resolved": "https://registry.npmjs.org/@lumeweb/libportal/-/libportal-0.2.0-develop.16.tgz",
-            "integrity": "sha512-wyzza/ttvU6I1gIs4tnYSkcT6s7MIBnUdJSNAbe6k6NsQ1w4bhBVJhEKbBru/lAEASO/PAhHGBwaOCv20rZZfA==",
+            "version": "0.2.0-develop.17",
+            "resolved": "https://registry.npmjs.org/@lumeweb/libportal/-/libportal-0.2.0-develop.17.tgz",
+            "integrity": "sha512-V8ac4NvRNCeE87rXNi9GX4J+ueztIWofBWMs24bmxWxrA46XOXC1Gm475IlAp4mSkyyUmy3vnnwQ4nYOi1U8Ew==",
             "dependencies": {
                 "@lumeweb/node-library-preset": "git+https://git.lumeweb.com/LumeWeb/node-library-preset.git",
                 "@noble/curves": "^1.1.0",
@@ -1741,15 +1728,16 @@
             }
         },
         "node_modules/@lumeweb/libweb": {
-            "version": "0.2.0-develop.26",
-            "resolved": "https://registry.npmjs.org/@lumeweb/libweb/-/libweb-0.2.0-develop.26.tgz",
-            "integrity": "sha512-XRIDiqRFqlEbcwjxAfkv7UYnyTflN3Q4rki8YAd9QrLQM2vycslgPLYS53vVJVL9GPH93V5J9z2V4DPQZlOOkQ==",
+            "version": "0.2.0-develop.30",
+            "resolved": "https://registry.npmjs.org/@lumeweb/libweb/-/libweb-0.2.0-develop.30.tgz",
+            "integrity": "sha512-6T/yhjk/2KYiJ4gjVQwHDFcjOlzz/EosZPbpkpAdUDW+yuFW0XiGKh7nQWyjVuk8C2zDawNh3jTRTz/FRiSFhg==",
             "dependencies": {
                 "@lumeweb/community-portals": "^0.1.0-develop.6",
-                "@lumeweb/libportal": "^0.2.0-develop.16",
+                "@lumeweb/libportal": "0.2.0-develop.17",
                 "@lumeweb/node-library-preset": "0.2.7",
                 "@noble/curves": "^1.1.0",
-                "@noble/hashes": "^1.3.1"
+                "@noble/hashes": "^1.3.1",
+                "binconv": "^0.2.0"
             }
         },
         "node_modules/@lumeweb/node-library-preset": {
@@ -3975,8 +3963,7 @@
         "node_modules/binconv": {
             "version": "0.2.0",
             "resolved": "https://registry.npmjs.org/binconv/-/binconv-0.2.0.tgz",
-            "integrity": "sha512-FAVbv8Fe1lsk1XQeWaYzfIQ9EnBgLJxjlqVA5XzbusP1YCzFgXUfIfmuanNmfM7i0XsNCNnYOnnq7NRLVKRgdQ==",
-            "dev": true
+            "integrity": "sha512-FAVbv8Fe1lsk1XQeWaYzfIQ9EnBgLJxjlqVA5XzbusP1YCzFgXUfIfmuanNmfM7i0XsNCNnYOnnq7NRLVKRgdQ=="
         },
         "node_modules/bn.js": {
             "version": "5.2.1",
@@ -10958,9 +10945,9 @@
             }
         },
         "node_modules/node-fetch": {
-            "version": "3.3.1",
-            "resolved": "https://registry.npmjs.org/node-fetch/-/node-fetch-3.3.1.tgz",
-            "integrity": "sha512-cRVc/kyto/7E5shrWca1Wsea4y6tL9iYJE5FBCius3JQfb/4P4I295PfhgbJQBLTx6lATE4z+wK0rPM4VS2uow==",
+            "version": "3.3.2",
+            "resolved": "https://registry.npmjs.org/node-fetch/-/node-fetch-3.3.2.tgz",
+            "integrity": "sha512-dRB78srN/l6gqWulah9SrxeYnxeddIG30+GOqK/9OlLVyLg3HPnr6SqOWTWOXKRwC2eGYCkZ59NNuSgvSrpgOA==",
             "dependencies": {
                 "data-uri-to-buffer": "^4.0.0",
                 "fetch-blob": "^3.1.4",
@@ -18353,9 +18340,9 @@
             }
         },
         "node_modules/tus-js-client": {
-            "version": "3.1.0",
-            "resolved": "https://registry.npmjs.org/tus-js-client/-/tus-js-client-3.1.0.tgz",
-            "integrity": "sha512-Hfpc8ho4C9Lhs/OflPUA/nHUHZJUrKD5upoPBq7dYJJ9DQhWocsjJU2RZYfN16Y5n19j9dFDszwCvVZ5sfcogw==",
+            "version": "3.1.1",
+            "resolved": "https://registry.npmjs.org/tus-js-client/-/tus-js-client-3.1.1.tgz",
+            "integrity": "sha512-SZzWP62jEFLmROSRZx+uoGLKqsYWMGK/m+PiNehPVWbCm7/S9zRIMaDxiaOcKdMnFno4luaqP5E+Y1iXXPjP0A==",
             "dependencies": {
                 "buffer-from": "^1.1.2",
                 "combine-errors": "^3.0.3",
