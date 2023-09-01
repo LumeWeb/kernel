@@ -13,10 +13,12 @@ import {
 import {
   deriveChildKey,
   downloadSmallObject,
+  hexToBytes,
   verifyCid,
 } from "@lumeweb/libweb";
 import type { moduleQuery, presentKeyData } from "@lumeweb/libkernel/module";
 import { readableStreamToUint8Array } from "binconv";
+import { getSavedRegistryEntry } from "./registry.js";
 
 // WorkerLaunchFn is the type signature of the function that launches the
 // worker to set up for processing a query.
@@ -308,16 +310,22 @@ function handleModuleCall(
     );
     return;
   }
+
+  let isRegistryEntry = false;
+  try {
+    isRegistryEntry = hexToBytes(event.data.data.module)?.length === 32;
+  } catch {}
+
   if (
     typeof event.data.data.module !== "string" ||
-    !verifyCid(event.data.data.module)
+    (!verifyCid(event.data.data.module) && !isRegistryEntry)
   ) {
     logErr("moduleCall", "received moduleCall with malformed module");
     respondErr(
       event,
       messagePortal,
       isWorker,
-      "'module' field in moduleCall is expected to be a base58 encoded blake3 hash + filesize",
+      "'module' field in moduleCall is expected to be a base58 encoded blake3 hash + filesize or a registry entry pubkey",
     );
     return;
   }
@@ -372,10 +380,22 @@ function handleModuleCall(
     return;
   }
 
-  // TODO: Load any overrides.
-  const finalModule = event.data.data.module; // Can change with overrides.
-  const moduleDomain = event.data.data.module; // Does not change with overrides.
+  let moduleDomain = event.data.data.module; // Can change with overrides.
+  let finalModule = moduleDomain; // Can change with overrides.
 
+  if (isRegistryEntry) {
+    finalModule = getSavedRegistryEntry(moduleDomain);
+    if (!finalModule) {
+      logErr("moduleCall", "received moduleCall with no known registry entry");
+      respondErr(
+        event,
+        messagePortal,
+        isWorker,
+        "registry entry for module is not found",
+      );
+      return;
+    }
+  }
   // Define a helper function to create a new query to the module. It will
   // both open a query on the module and also send an update message to the
   // caller with the kernel nonce for this query so that the caller can
