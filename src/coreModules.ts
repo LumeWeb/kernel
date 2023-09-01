@@ -1,5 +1,4 @@
-import { modules } from "#queries.js";
-import { internalModuleCall } from "./queries.js";
+import { internalModuleCall, modules } from "./queries.js";
 import { SignedRegistryEntry } from "@lumeweb/libs5";
 import { base58btc } from "multiformats/bases/base58";
 
