@@ -19,6 +19,8 @@ import {
 import type { moduleQuery, presentKeyData } from "@lumeweb/libkernel/module";
 import { readableStreamToUint8Array } from "binconv";
 import { getSavedRegistryEntry } from "./registry.js";
+import { defer } from "@lumeweb/libkernel/module";
+import { networkReady, resolveModuleRegistryEntry } from "./coreModules.js";
 
 // WorkerLaunchFn is the type signature of the function that launches the
 // worker to set up for processing a query.
@@ -40,6 +42,8 @@ interface Module {
 // OpenQuery holds all of the information necessary for managing an open query.
 interface OpenQuery {
   isWorker: boolean;
+  isInternal: boolean;
+  internalHandler?: (message: OpenQueryResponse) => void;
   domain: string;
   source: any;
   dest: Worker;
@@ -47,13 +51,19 @@ interface OpenQuery {
   origin: string;
 }
 
+interface OpenQueryResponse {
+  nonce: string;
+  method: string;
+  data: any;
+  err?: any;
+}
+
 // Define the stateful variables for managing the modules. We track the set of
 // queries that are in progress, the set of skapps that are known to the
 // kernel, the set of modules that we've downloaded, and the set of modules
 // that are actively being downloaded.
 let queriesNonce = 0;
-const queries = {} as any;
-const skapps = {} as any;
+const queries = {} as { [module: string]: OpenQuery };
 const modules = {} as any;
 const modulesLoading = {} as any;
 
@@ -178,7 +188,7 @@ function handleWorkerMessage(event: MessageEvent, mod: Module, worker: Worker) {
 
   // Handle a call from the worker to another module.
   if (event.data.method === "moduleCall") {
-    handleModuleCall(event, worker, mod.domain, true);
+    handleModuleCall(event, worker, mod.domain, true, false);
     return;
   }
 
@@ -290,11 +300,12 @@ function launchWorker(mod: Module): [Worker, Err] {
 
 // handleModuleCall will handle a callModule message sent to the kernel from an
 // extension or webpage.
-function handleModuleCall(
+async function handleModuleCall(
   event: MessageEvent,
   messagePortal: any,
   callerDomain: string,
   isWorker: boolean,
+  isInternal: false | ((message: OpenQueryResponse) => void),
 ) {
   if (!("data" in event.data) || !("module" in event.data.data)) {
     logErr(
@@ -345,7 +356,7 @@ function handleModuleCall(
   if (typeof event.data.data.method !== "string") {
     logErr(
       "moduleCall",
-      "recieved moduleCall with malformed method",
+      "received moduleCall with malformed method",
       event.data,
     );
     respondErr(
@@ -365,7 +376,7 @@ function handleModuleCall(
       event,
       messagePortal,
       isWorker,
-      "presentSeed is a priviledged method, only root is allowed to use it",
+      "presentSeed is a privileged method, only root is allowed to use it",
     );
     return;
   }
@@ -384,8 +395,7 @@ function handleModuleCall(
   let finalModule = moduleDomain; // Can change with overrides.
 
   if (isRegistryEntry) {
-    finalModule = getSavedRegistryEntry(moduleDomain);
-    if (!finalModule) {
+    const registryFail = () => {
       logErr("moduleCall", "received moduleCall with no known registry entry");
       respondErr(
         event,
@@ -393,7 +403,23 @@ function handleModuleCall(
         isWorker,
         "registry entry for module is not found",
       );
-      return;
+    };
+
+    finalModule = getSavedRegistryEntry(moduleDomain);
+    if (!finalModule) {
+      if (!(await networkReady())) {
+        registryFail();
+        return;
+      }
+      let resolvedModule;
+
+      try {
+        resolvedModule = await resolveModuleRegistryEntry(finalModule);
+      } catch (e) {
+        registryFail();
+        return;
+      }
+      finalModule = resolvedModule;
     }
   }
   // Define a helper function to create a new query to the module. It will
@@ -420,6 +446,8 @@ function handleModuleCall(
     queriesNonce = queriesNonce + 1;
     queries[nonce] = {
       isWorker,
+      isInternal: !!isInternal,
+      internalHandler: isInternal ?? undefined,
       domain: callerDomain,
       source: messagePortal,
       dest: worker,
@@ -614,11 +642,14 @@ function handleModuleResponse(
 
   // We are sending either a response message or a responseUpdate message,
   // all other possibilities have been handled.
-  const sourceIsWorker = queries[event.data.nonce].isWorker;
-  const sourceNonce = queries[event.data.nonce].nonce;
-  const source = queries[event.data.nonce].source;
-  const origin = queries[event.data.nonce].origin;
-  const msg: any = {
+  const query = queries[event.data.nonce];
+  const sourceIsWorker = query.isWorker;
+  const sourceIsInternal = query.isInternal;
+  const internalHandler = query.internalHandler;
+  const sourceNonce = query.nonce;
+  const source = query.source;
+  const origin = query.origin;
+  const msg: OpenQueryResponse = {
     nonce: sourceNonce,
     method: event.data.method,
     data: event.data.data,
@@ -629,8 +660,11 @@ function handleModuleResponse(
     msg["err"] = event.data.err;
     delete queries[event.data.nonce];
   }
-  if (sourceIsWorker === true) {
+
+  if (sourceIsWorker) {
     source.postMessage(msg);
+  } else if (sourceIsInternal) {
+    internalHandler?.(msg);
   } else {
     source.postMessage(msg, origin);
   }
@@ -654,6 +688,39 @@ function handleQueryUpdate(event: MessageEvent) {
     method: event.data.method,
     data: event.data.data,
   });
+}
+
+export async function internalModuleCall(
+  module: string,
+  method: string,
+  params = {},
+): Promise<any> {
+  const callDefer = defer();
+  handleModuleCall(
+    {
+      data: {
+        data: {
+          module,
+          method,
+          data: params,
+          nonce: 0,
+        },
+      },
+      origin: "root",
+    } as any,
+    undefined,
+    "root",
+    false,
+    (message) => {
+      if (message.err) {
+        callDefer.reject(message.err);
+        return;
+      }
+      callDefer.resolve(message.data.data);
+    },
+  );
+
+  return callDefer.promise;
 }
 
 export {

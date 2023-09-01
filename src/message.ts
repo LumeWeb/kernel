@@ -93,7 +93,7 @@ export const handleIncomingMessage = function (event: any) {
     } else {
       domain = new URL(event.origin).hostname;
     }
-    handleModuleCall(event, event.source, domain, false);
+    handleModuleCall(event, event.source, domain, false, false);
     return;
   }
   if (event.data.method === "queryUpdate") {
