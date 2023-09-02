@@ -729,7 +729,7 @@ export async function internalModuleCall(
         callDefer.reject(message.err);
         return;
       }
-      callDefer.resolve(message.data.data);
+      callDefer.resolve(message.data);
     },
   );
 
