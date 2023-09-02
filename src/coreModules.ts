@@ -3,15 +3,13 @@ import { SignedRegistryEntry } from "@lumeweb/libs5";
 import { base58btc } from "multiformats/bases/base58";
 
 const CORE_MODULES = {
-  swarm: "z3o47aaLSspwrXzmu5mjuHPwaq3gRbyYQ3jL9RM1ammuHGB7uxSFBK2dRjqR",
+  swarm: "z3o47ar8NBrnaEneBVzZD7QuMRMXjDtQDCpt4xP6mhsdw1cjnJ8mQKfNKGv3",
   peerDiscoveryRegistry:
     "z3o47aaLSspwrXzmu5mjuHPwaq3gRbyYQ3jL9RM1ammuHGB7uxSFBK2dRjqR",
   ircPeerDiscovery:
     "z3o47admQjBj2QUrwHhvTB3nV1cBwQ5ZaKF7P5WELXeRyzzvBZr33QMJWTLs",
   s5: "z3o47hB2zLuvBMFaWa55SmbFQe3u97dWUG4fssXXTEcT4ZvnPkPaRF14b1EF",
 };
-
-export default CORE_MODULES;
 
 export async function networkReady() {
   for (const module of [
