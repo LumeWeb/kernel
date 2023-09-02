@@ -1,3 +1,12 @@
+# [0.1.0-develop.8](https://git.lumeweb.com/LumeWeb/kernel/compare/v0.1.0-develop.7...v0.1.0-develop.8) (2023-09-02)
+
+
+### Bug Fixes
+
+* missing return ([7d44208](https://git.lumeweb.com/LumeWeb/kernel/commit/7d442081322aad0bab186fa57476ab15fc07e30c))
+* need to call swarm not peerDiscoveryRegistry ([27ba637](https://git.lumeweb.com/LumeWeb/kernel/commit/27ba637ac224bcac76635bc8659d76d0472f342d))
+* use message.data not message.data.data ([4a73a27](https://git.lumeweb.com/LumeWeb/kernel/commit/4a73a2779d3a8020f06f0d8d75c386abf66e15b1))
+
 # [0.1.0-develop.7](https://git.lumeweb.com/LumeWeb/kernel/compare/v0.1.0-develop.6...v0.1.0-develop.7) (2023-09-02)
 
 # [0.1.0-develop.6](https://git.lumeweb.com/LumeWeb/kernel/compare/v0.1.0-develop.5...v0.1.0-develop.6) (2023-09-02)
