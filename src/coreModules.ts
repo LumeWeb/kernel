@@ -21,11 +21,7 @@ export async function networkReady() {
       return false;
     }
   }
-
-  const resolvers = await internalModuleCall(
-    CORE_MODULES.peerDiscoveryRegistry,
-    "getRelays",
-  );
+  const resolvers = await internalModuleCall(CORE_MODULES.swarm, "getRelays");
 
   return resolvers.length > 0;
 }
