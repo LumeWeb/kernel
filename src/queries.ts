@@ -11,11 +11,13 @@ import {
   sha512,
 } from "@lumeweb/libkernel";
 import {
+  CID,
+  decodeCid,
   deriveChildKey,
   downloadSmallObject,
-  hexToBytes,
   verifyCid,
 } from "@lumeweb/libweb";
+import { CID_TYPES, CID_HASH_TYPES } from "@lumeweb/libs5";
 import type { moduleQuery, presentKeyData } from "@lumeweb/libkernel/module";
 import { readableStreamToUint8Array } from "binconv";
 import { getSavedRegistryEntry } from "./registry.js";
@@ -322,21 +324,32 @@ async function handleModuleCall(
     return;
   }
 
-  let isRegistryEntry = false;
-  try {
-    isRegistryEntry = hexToBytes(event.data.data.module)?.length === 32;
-  } catch {}
-
+  let validCid = false;
+  let isResolver = false;
   if (
-    typeof event.data.data.module !== "string" ||
-    (!verifyCid(event.data.data.module) && !isRegistryEntry)
+    typeof event.data.data.module === "string" &&
+    verifyCid(event.data.data.module)
   ) {
+    const decodedCid = decodeCid(event.data.data.module);
+    if (!decodedCid[1]) {
+      const { type, hashType } = decodedCid[0];
+      if (type === CID_TYPES.RAW && hashType === CID_HASH_TYPES.BLAKE3) {
+        validCid = true;
+      }
+      if (type === CID_TYPES.RESOLVER && hashType === CID_HASH_TYPES.ED25519) {
+        validCid = true;
+        isResolver = true;
+      }
+    }
+  }
+
+  if (!validCid) {
     logErr("moduleCall", "received moduleCall with malformed module");
     respondErr(
       event,
       messagePortal,
       isWorker,
-      "'module' field in moduleCall is expected to be a base58 encoded blake3 hash + filesize or a registry entry pubkey",
+      "'module' field in moduleCall is expected to be a raw CID or a resolver CID",
     );
     return;
   }
@@ -394,7 +407,7 @@ async function handleModuleCall(
   let moduleDomain = event.data.data.module; // Can change with overrides.
   let finalModule = moduleDomain; // Can change with overrides.
 
-  if (isRegistryEntry) {
+  if (isResolver) {
     const registryFail = () => {
       logErr("moduleCall", "received moduleCall with no known registry entry");
       respondErr(
