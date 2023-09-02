@@ -1,6 +1,7 @@
 import { internalModuleCall, modules } from "./queries.js";
 import { SignedRegistryEntry } from "@lumeweb/libs5";
 import { base58btc } from "multiformats/bases/base58";
+import { decodeCid } from "@lumeweb/libweb";
 
 const CORE_MODULES = {
   swarm: "z3o47ar8NBrnaEneBVzZD7QuMRMXjDtQDCpt4xP6mhsdw1cjnJ8mQKfNKGv3",
@@ -30,7 +31,11 @@ function moduleLoaded(module: string) {
   return module in modules;
 }
 
-export async function resolveModuleRegistryEntry(pubkey: string) {
+export async function resolveModuleRegistryEntry(module: string) {
+  const [cid] = decodeCid(module);
+
+  const pubkey = cid.hash;
+
   const signedEntry = (await internalModuleCall(
     CORE_MODULES.s5,
     "getRegistryEntry",
