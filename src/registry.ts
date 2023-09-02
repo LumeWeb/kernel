@@ -28,7 +28,7 @@ export function getSavedRegistryEntry(pubkey: string) {
   }
 
   if (DEFAULT_MODULE_REGISTRY.has(pubkey)) {
-    DEFAULT_MODULE_REGISTRY.get(pubkey) as string;
+    return DEFAULT_MODULE_REGISTRY.get(pubkey) as string;
   }
 
   return null;
