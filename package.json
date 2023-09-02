@@ -7,7 +7,6 @@
         "url": "gitea@git.lumeweb.com:LumeWeb/kernel.git"
     },
     "devDependencies": {
-        "@lumeweb/libs5": "^0.1.0-develop.25",
         "@lumeweb/presetter-kernel-module-preset": "^0.1.0-develop.43",
         "binconv": "^0.2.0",
         "presetter": "*",
@@ -20,6 +19,6 @@
         "semantic-release": "semantic-release"
     },
     "dependencies": {
-        "@lumeweb/libkernel": "0.1.0-develop.35"
+        "@lumeweb/libkernel": "0.1.0-develop.38"
     }
 }
