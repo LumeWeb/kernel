@@ -1,3 +1,16 @@
+# [0.1.0-develop.5](https://git.lumeweb.com/LumeWeb/kernel/compare/v0.1.0-develop.4...v0.1.0-develop.5) (2023-09-01)
+
+
+### Bug Fixes
+
+* fix import ([787c7c6](https://git.lumeweb.com/LumeWeb/kernel/commit/787c7c6637f8291c4b2e9558f1d68ebabcb2e225))
+
+
+### Features
+
+* add initial fallback registry support ([5cc457d](https://git.lumeweb.com/LumeWeb/kernel/commit/5cc457d78b40541c1ecfa1d6a5c07274a7d48ab6))
+* add initial support to query the network for a registry entry for a module ([ba4c6dc](https://git.lumeweb.com/LumeWeb/kernel/commit/ba4c6dcb9552eeb7cf4b87e31d2f878b1eb83198))
+
 # [0.1.0-develop.4](https://git.lumeweb.com/LumeWeb/kernel/compare/v0.1.0-develop.3...v0.1.0-develop.4) (2023-08-10)
 
 # [0.1.0-develop.3](https://git.lumeweb.com/LumeWeb/kernel/compare/v0.1.0-develop.2...v0.1.0-develop.3) (2023-08-10)
