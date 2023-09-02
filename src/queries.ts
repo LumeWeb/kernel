@@ -427,7 +427,7 @@ async function handleModuleCall(
       let resolvedModule;
 
       try {
-        resolvedModule = await resolveModuleRegistryEntry(finalModule);
+        resolvedModule = await resolveModuleRegistryEntry(moduleDomain);
       } catch (e) {
         registryFail();
         return;
