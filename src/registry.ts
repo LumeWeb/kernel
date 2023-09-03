@@ -1,17 +1,17 @@
 const DEFAULT_MODULE_REGISTRY = new Map<string, string>(
   Object.entries({
     // swarm
-    z3o47ar8NBrnaEneBVzZD7QuMRMXjDtQDCpt4xP6mhsdw1cjnJ8mQKfNKGv3:
-      "zduTR1y921Erd52dYq1DKLpA9J6sw8g8KPfUdbkqmwdXDGKCjQKL4SHvDd",
+    zdiLmwHCC15afFNLYzzT2DVV7m27SrBde7oXHdSzAe95GpFZXzdpatUN6b:
+      "zduMnWZNBBk7yjTX46sP3Frbnx8btaVjn7ozKb3jgdWpJqH14Kn8Qk31LK",
     // peerDiscoveryRegistry
-    z3o47aaLSspwrXzmu5mjuHPwaq3gRbyYQ3jL9RM1ammuHGB7uxSFBK2dRjqR:
+    zdiLW9MtAAMssP5vLBgd1FitouiVXzNUYZszFYG44uVKqCPDqUQox9aq1y:
       "zduJceGhVmwR6wf2xUhJp9juU6rabynbi8mFwmBcKEaP8nc1mXyrDyRMmy",
     // ircPeerDiscovery
-    z3o47admQjBj2QUrwHhvTB3nV1cBwQ5ZaKF7P5WELXeRyzzvBZr33QMJWTLs:
+    zdiLZaKjWwXkMU88GNEWf6d5NREHe1Yk4M7eQm1owSC4ezeqFGGuGpfYXR:
       "zduLx8mxrSWBPpTby1n9GtvxmCu6DwK9bsu26AgxesJmeEcWrVAF4NX7QK",
     // s5
-    z3o47hB2zLuvBMFaWa55SmbFQe3u97dWUG4fssXXTEcT4ZvnPkPaRF14b1EF:
-      "zduTZ7NBNtGxQxbAaDNcp7d1xta7y2MXKnjvVA3m29ohwBeeLHL1GieTPd",
+    zdiT6quMF8gh8BhQdXE7CZYhp8S1BxSgsucSS48WuTGdars1noejvak6Qo:
+      "zduHdVUg8SUJQ5dwx1LnesjMTxDFxireNrppRng7z14QDZnqZCCiiWtcT9",
   }),
 );
 const REGISTRY_ITEM_ID = "registry";
