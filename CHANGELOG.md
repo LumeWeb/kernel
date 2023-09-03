@@ -1,3 +1,11 @@
+# [0.1.0-develop.9](https://git.lumeweb.com/LumeWeb/kernel/compare/v0.1.0-develop.8...v0.1.0-develop.9) (2023-09-03)
+
+
+### Bug Fixes
+
+* finalModule needs to be moduleDomain ([6b0d43f](https://git.lumeweb.com/LumeWeb/kernel/commit/6b0d43fe9b41150a768025d8d6b2edc7033e1607))
+* have resolveModuleRegistryEntry decode the cid and pass the pubkey ([e6318cd](https://git.lumeweb.com/LumeWeb/kernel/commit/e6318cdc38b839de8c95d36c1f5276596b57bd83))
+
 # [0.1.0-develop.8](https://git.lumeweb.com/LumeWeb/kernel/compare/v0.1.0-develop.7...v0.1.0-develop.8) (2023-09-02)
 
 
