@@ -8,7 +8,7 @@ const DEFAULT_MODULE_REGISTRY = new Map<string, string>(
       "zduJceGhVmwR6wf2xUhJp9juU6rabynbi8mFwmBcKEaP8nc1mXyrDyRMmy",
     // ircPeerDiscovery
     zdiLZaKjWwXkMU88GNEWf6d5NREHe1Yk4M7eQm1owSC4ezeqFGGuGpfYXR:
-      "zduLx8mxrSWBPpTby1n9GtvxmCu6DwK9bsu26AgxesJmeEcWrVAF4NX7QK",
+      "zduGKansawKCn6Uzr9sPKVbVkdJCgUVL1mizy38t7tHvUxfEGQMC14R3EP",
     // s5
     zdiT6quMF8gh8BhQdXE7CZYhp8S1BxSgsucSS48WuTGdars1noejvak6Qo:
       "zduHdVUg8SUJQ5dwx1LnesjMTxDFxireNrppRng7z14QDZnqZCCiiWtcT9",
