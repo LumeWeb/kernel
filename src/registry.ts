@@ -11,7 +11,7 @@ const DEFAULT_MODULE_REGISTRY = new Map<string, string>(
       "zduGKansawKCn6Uzr9sPKVbVkdJCgUVL1mizy38t7tHvUxfEGQMC14R3EP",
     // s5
     zdiT6quMF8gh8BhQdXE7CZYhp8S1BxSgsucSS48WuTGdars1noejvak6Qo:
-      "zduHdVUg8SUJQ5dwx1LnesjMTxDFxireNrppRng7z14QDZnqZCCiiWtcT9",
+      "zduKLoxH3mmw2kHkkV18H2MLy99sA1RmFgarte63ng5WD39FmbeUXtB7iX",
   }),
 );
 const REGISTRY_ITEM_ID = "registry";
