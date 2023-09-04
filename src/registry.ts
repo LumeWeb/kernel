@@ -2,7 +2,7 @@ const DEFAULT_MODULE_REGISTRY = new Map<string, string>(
   Object.entries({
     // swarm
     zdiLmwHCC15afFNLYzzT2DVV7m27SrBde7oXHdSzAe95GpFZXzdpatUN6b:
-      "zduMnWZNBBk7yjTX46sP3Frbnx8btaVjn7ozKb3jgdWpJqH14Kn8Qk31LK",
+      "zduLvD6fRRmCy97T6RweYaPTxHdwFJmvmoygB4hCu3sJnZjHiYCKke4cG7",
     // peerDiscoveryRegistry
     zdiLW9MtAAMssP5vLBgd1FitouiVXzNUYZszFYG44uVKqCPDqUQox9aq1y:
       "zduJceGhVmwR6wf2xUhJp9juU6rabynbi8mFwmBcKEaP8nc1mXyrDyRMmy",
