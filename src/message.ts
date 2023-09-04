@@ -83,6 +83,7 @@ export const handleIncomingMessage = function (event: any) {
         event,
         event.source,
         false,
+        false,
         "caller is an extension, but not domain was provided",
       );
       return;
@@ -105,6 +106,7 @@ export const handleIncomingMessage = function (event: any) {
   respondErr(
     event,
     event.source,
+    false,
     false,
     "unrecognized method: " + event.data.method,
   );

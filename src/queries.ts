@@ -53,7 +53,7 @@ interface OpenQuery {
   origin: string;
 }
 
-interface OpenQueryResponse {
+export interface OpenQueryResponse {
   nonce: string;
   method: string;
   data: any;
@@ -96,7 +96,7 @@ function handleWorkerMessage(event: MessageEvent, mod: Module, worker: Worker) {
   // Perform input verification for a worker message.
   if (!("method" in event.data)) {
     logErr("worker", mod.domain, "received worker message with no method");
-    respondErr(event, worker, true, "received message with no method");
+    respondErr(event, worker, true, false, "received message with no method");
     return;
   }
 
@@ -113,6 +113,7 @@ function handleWorkerMessage(event: MessageEvent, mod: Module, worker: Worker) {
         event,
         worker,
         true,
+        false,
         "received log messsage with no data field",
       );
       return;
@@ -127,6 +128,7 @@ function handleWorkerMessage(event: MessageEvent, mod: Module, worker: Worker) {
         event,
         worker,
         true,
+        false,
         "received log messsage with no message field",
       );
       return;
@@ -144,6 +146,7 @@ function handleWorkerMessage(event: MessageEvent, mod: Module, worker: Worker) {
         event,
         worker,
         true,
+        false,
         "received log messsage with invalid isErr field",
       );
       return;
@@ -169,7 +172,7 @@ function handleWorkerMessage(event: MessageEvent, mod: Module, worker: Worker) {
       "worker sent a message with no nonce",
       event.data,
     );
-    respondErr(event, worker, true, "received message with no nonce");
+    respondErr(event, worker, true, false, "received message with no nonce");
     return;
   }
 
@@ -319,6 +322,7 @@ async function handleModuleCall(
       event,
       messagePortal,
       isWorker,
+      isInternal,
       "moduleCall is missing 'module' field: " + JSON.stringify(event.data),
     );
     return;
@@ -349,6 +353,7 @@ async function handleModuleCall(
       event,
       messagePortal,
       isWorker,
+      isInternal,
       "'module' field in moduleCall is expected to be a raw CID or a resolver CID",
     );
     return;
@@ -362,6 +367,7 @@ async function handleModuleCall(
       event,
       messagePortal,
       isWorker,
+      isInternal,
       "no 'data.method' specified, module does not know what method to run",
     );
     return;
@@ -376,6 +382,7 @@ async function handleModuleCall(
       event,
       messagePortal,
       isWorker,
+      isInternal,
       "'data.method' needs to be a string",
     );
     return;
@@ -389,6 +396,7 @@ async function handleModuleCall(
       event,
       messagePortal,
       isWorker,
+      isInternal,
       "presentSeed is a privileged method, only root is allowed to use it",
     );
     return;
@@ -399,6 +407,7 @@ async function handleModuleCall(
       event,
       messagePortal,
       isWorker,
+      isInternal,
       "no field data.data in moduleCall, data.data contains the module input",
     );
     return;
@@ -414,6 +423,7 @@ async function handleModuleCall(
         event,
         messagePortal,
         isWorker,
+        isInternal,
         "registry entry for module is not found",
       );
     };
@@ -511,6 +521,7 @@ async function handleModuleCall(
           event,
           messagePortal,
           isWorker,
+          isInternal,
           addContextToErr(errML, "module could not be loaded"),
         );
         return;
@@ -530,7 +541,7 @@ async function handleModuleCall(
     const [moduleData, errDS] = await downloadSmallObject(finalModule);
     if (errDS !== null) {
       const err = addContextToErr(errDS, "unable to load module");
-      respondErr(event, messagePortal, isWorker, err);
+      respondErr(event, messagePortal, isWorker, isInternal, err);
       resolve(err);
       delete modulesLoading[moduleDomain];
       return;
@@ -563,7 +574,7 @@ async function handleModuleCall(
     const [mod, errCM] = await createModule(moduleData, moduleDomain);
     if (errCM !== null) {
       const err = addContextToErr(errCM, "unable to create module");
-      respondErr(event, messagePortal, isWorker, err);
+      respondErr(event, messagePortal, isWorker, isInternal, err);
       resolve(err);
       delete modulesLoading[moduleDomain];
       return;
@@ -605,7 +616,7 @@ function handleModuleResponse(
   if (!(event.data.nonce in queries)) {
     // If there's no corresponding query and this is a response, send an
     // error.
-    if (isResponse === true) {
+    if (isResponse) {
       logErr("worker", mod.domain, "received response for an unknown nonce");
       return;
     }

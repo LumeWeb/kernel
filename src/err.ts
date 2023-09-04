@@ -1,6 +1,8 @@
 // notableErrors is a persistent list of errors that should be checked after
 // testing. You should only add to this array in the event of an error that
 // indicates a bug with the kernel.
+import { OpenQueryResponse } from "./queries.js";
+
 const notableErrors: string[] = [];
 
 // respondErr will send an error response to the caller that closes out the
@@ -13,6 +15,7 @@ function respondErr(
   event: MessageEvent,
   messagePortal: any,
   isWorker: boolean,
+  isInternal: false | ((message: OpenQueryResponse) => void),
   err: string,
 ) {
   const message = {
@@ -20,9 +23,11 @@ function respondErr(
     method: "response",
     data: {},
     err,
-  };
-  if (isWorker === true) {
+  } as OpenQueryResponse;
+  if (isWorker) {
     messagePortal.postMessage(message);
+  } else if (isInternal) {
+    isInternal(message);
   } else {
     messagePortal.postMessage(message, event.origin);
   }
