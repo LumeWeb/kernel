@@ -1,7 +1,10 @@
 import { internalModuleCall, modules } from "./queries.js";
 import { SignedRegistryEntry } from "@lumeweb/libs5";
-import { base58btc } from "multiformats/bases/base58";
-import { decodeCid } from "@lumeweb/libweb";
+import {
+  decodeRegistryValue,
+  encodeCid,
+  decodeRegistryCid,
+} from "@lumeweb/libweb";
 
 const CORE_MODULES = {
   swarm: "zdiLmwHCC15afFNLYzzT2DVV7m27SrBde7oXHdSzAe95GpFZXzdpatUN6b",
@@ -32,7 +35,7 @@ function moduleLoaded(module: string) {
 }
 
 export async function resolveModuleRegistryEntry(module: string) {
-  const [cid] = decodeCid(module);
+  const [cid] = decodeRegistryCid(module);
 
   const pubkey = cid.hash;
 
@@ -42,5 +45,18 @@ export async function resolveModuleRegistryEntry(module: string) {
     { pubkey },
   )) as SignedRegistryEntry;
 
-  return base58btc.encode(signedEntry.data);
+  let [decodedRegistry, err] = decodeRegistryValue(signedEntry.data);
+
+  if (err) {
+    throw new Error(err);
+  }
+
+  let rawEncCid;
+  [rawEncCid, err] = encodeCid(decodedRegistry);
+
+  if (err) {
+    throw new Error(err);
+  }
+
+  return rawEncCid;
 }
