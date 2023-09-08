@@ -8,7 +8,7 @@
             "name": "@lumeweb/kernel",
             "version": "0.1.0-develop.13",
             "dependencies": {
-                "@lumeweb/libkernel": "0.1.0-develop.49"
+                "@lumeweb/libkernel": "0.1.0-develop.50"
             },
             "devDependencies": {
                 "@lumeweb/presetter-kernel-module-preset": "^0.1.0-develop.43",
@@ -1690,11 +1690,11 @@
             }
         },
         "node_modules/@lumeweb/libkernel": {
-            "version": "0.1.0-develop.49",
-            "resolved": "https://registry.npmjs.org/@lumeweb/libkernel/-/libkernel-0.1.0-develop.49.tgz",
-            "integrity": "sha512-proKVbrYn0N3RoSXuE7/XzOZswbOTisKmWTlRSwwuGhSEe9xXshkXtCGRi0kS3FIvn/oYUUW/mlIzF9VovG6MA==",
+            "version": "0.1.0-develop.50",
+            "resolved": "https://registry.npmjs.org/@lumeweb/libkernel/-/libkernel-0.1.0-develop.50.tgz",
+            "integrity": "sha512-KfJSdJ/nNIQmx1GenH92JEF80Fz/KzNvQV07wO7VZ2jQGwJhB1tR+ufX9foLxt+ydmVLKbE6A6XaPwrlU+DGVg==",
             "dependencies": {
-                "@lumeweb/libweb": "0.2.0-develop.54",
+                "@lumeweb/libweb": "0.2.0-develop.55",
                 "emittery": "^1.0.1",
                 "p-defer": "^4.0.0"
             }
@@ -1751,9 +1751,9 @@
             }
         },
         "node_modules/@lumeweb/libweb": {
-            "version": "0.2.0-develop.54",
-            "resolved": "https://registry.npmjs.org/@lumeweb/libweb/-/libweb-0.2.0-develop.54.tgz",
-            "integrity": "sha512-ZQDbR7fuhipsZq47w2KDpeQes2VFAHf+2z7XKn1eHoiOwd882hl8Y4JPC2t9qtd+fuqL5RA/NJf4aC2NIt5QqQ==",
+            "version": "0.2.0-develop.55",
+            "resolved": "https://registry.npmjs.org/@lumeweb/libweb/-/libweb-0.2.0-develop.55.tgz",
+            "integrity": "sha512-5CqsU2KjkNovRj92N9M/dGNu9Z5Tyu6pr8XwrFZQOLPseDebbFY3d+Wp+PV5Z3TqtuXaQ/+j7buR3K3175d37A==",
             "dependencies": {
                 "@lumeweb/community-portals": "^0.1.0-develop.6",
                 "@lumeweb/libportal": "0.2.0-develop.34",

@@ -19,6 +19,6 @@
         "semantic-release": "semantic-release"
     },
     "dependencies": {
-        "@lumeweb/libkernel": "0.1.0-develop.49"
+        "@lumeweb/libkernel": "0.1.0-develop.50"
     }
 }
