@@ -1,4 +1,4 @@
-import { objAsString } from "@lumeweb/libweb";
+import { objAsString } from "@lumeweb/libkernel";
 
 // wLog is a wrapper for the log and logErr functions, to deduplicate code.
 //
