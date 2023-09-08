@@ -28,10 +28,14 @@ log("init", "Lume Web Kernel v" + KERNEL_VERSION + "-" + KERNEL_DISTRO);
  */
 setActivePortalMasterKey(activeKey);
 
-let [, portalLoadErr] = maybeInitDefaultPortals();
-if (portalLoadErr) {
-  let err = addContextToErr(portalLoadErr, "unable to init portals");
+let portalLoadErr = false;
+
+try {
+  maybeInitDefaultPortals();
+} catch (e) {
+  let err = addContextToErr(e, "unable to init portals");
   logErr(err);
+  portalLoadErr = true;
 }
 
 if (!portalLoadErr) {
