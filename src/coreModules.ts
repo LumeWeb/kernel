@@ -1,10 +1,5 @@
 import { internalModuleCall, modules } from "./queries.js";
-import { SignedRegistryEntry } from "@lumeweb/libs5";
-import {
-  decodeRegistryValue,
-  encodeCid,
-  decodeRegistryCid,
-} from "@lumeweb/libweb";
+import { SignedRegistryEntry, CID } from "@lumeweb/libs5";
 
 const CORE_MODULES = {
   swarm: "zdiLmwHCC15afFNLYzzT2DVV7m27SrBde7oXHdSzAe95GpFZXzdpatUN6b",
@@ -35,7 +30,7 @@ function moduleLoaded(module: string) {
 }
 
 export async function resolveModuleRegistryEntry(module: string) {
-  const [cid] = decodeRegistryCid(module);
+  const cid = CID.decode(module);
 
   const pubkey = cid.hash;
 
@@ -45,18 +40,5 @@ export async function resolveModuleRegistryEntry(module: string) {
     { pubkey },
   )) as SignedRegistryEntry;
 
-  let [decodedRegistry, err] = decodeRegistryValue(signedEntry.data);
-
-  if (err) {
-    throw new Error(err);
-  }
-
-  let rawEncCid;
-  [rawEncCid, err] = encodeCid(decodedRegistry);
-
-  if (err) {
-    throw new Error(err);
-  }
-
-  return rawEncCid;
+  const entry = CID.fromRegistry(signedEntry.data);
 }
