@@ -326,18 +326,12 @@ async function handleModuleCall(
   let isResolver = false;
   if (
     typeof event.data.data.module === "string" &&
-    verifyCid(event.data.data.module)
+    CID.verify(event.data.data.module)
   ) {
-    const decodedCid = decodeCid(event.data.data.module);
-    if (!decodedCid[1]) {
-      const { type, hashType } = decodedCid[0];
-      if (type === CID_TYPES.RAW && hashType === CID_HASH_TYPES.BLAKE3) {
-        validCid = true;
-      }
-      if (type === CID_TYPES.RESOLVER && hashType === CID_HASH_TYPES.ED25519) {
-        validCid = true;
-        isResolver = true;
-      }
+    const cid = CID.decode(event.data.data.module);
+    validCid = true;
+    if (cid.type === CID_TYPES.RESOLVER) {
+      isResolver = true;
     }
   }
 
