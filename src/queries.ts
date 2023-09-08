@@ -10,18 +10,12 @@ import {
   objAsString,
   sha512,
 } from "@lumeweb/libkernel";
-import {
-  CID,
-  decodeCid,
-  deriveChildKey,
-  downloadSmallObject,
-  verifyCid,
-} from "@lumeweb/libweb";
-import { CID_TYPES, CID_HASH_TYPES } from "@lumeweb/libs5";
+import { deriveChildKey, downloadSmallObject } from "@lumeweb/libweb";
+import { CID, CID_TYPES } from "@lumeweb/libs5";
 import type { moduleQuery, presentKeyData } from "@lumeweb/libkernel/module";
+import { defer } from "@lumeweb/libkernel/module";
 import { readableStreamToUint8Array } from "binconv";
 import { getSavedRegistryEntry } from "./registry.js";
-import { defer } from "@lumeweb/libkernel/module";
 import { networkReady, resolveModuleRegistryEntry } from "./coreModules.js";
 
 // WorkerLaunchFn is the type signature of the function that launches the
@@ -537,10 +531,12 @@ async function handleModuleCall(
   modulesLoading[moduleDomain] = new Promise(async (resolve) => {
     // TODO: Check localStorage for the module.
 
-    // Download the code for the worker.
-    const [moduleData, errDS] = await downloadSmallObject(finalModule);
-    if (errDS !== null) {
-      const err = addContextToErr(errDS, "unable to load module");
+    let moduleData;
+
+    try {
+      moduleData = await downloadSmallObject(finalModule);
+    } catch (e) {
+      const err = addContextToErr(e, "unable to load module");
       respondErr(event, messagePortal, isWorker, isInternal, err);
       resolve(err);
       delete modulesLoading[moduleDomain];
