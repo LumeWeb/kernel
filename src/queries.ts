@@ -670,7 +670,7 @@ function handleModuleResponse(
     nonce: sourceNonce,
     method: event.data.method,
     data: event.data.data,
-    sw: event.data.sw,
+    sw: query.sw,
   };
   // For responses only, set an error and close out the query by deleting it
   // from the query map.
