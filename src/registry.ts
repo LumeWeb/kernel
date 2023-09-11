@@ -20,7 +20,7 @@ Object.freeze(DEFAULT_MODULE_REGISTRY);
 
 export function getSavedRegistryEntry(pubkey: string) {
   const savedEntries = new Map<string, string>(
-    Object.entries(window.localStorage.getItem(REGISTRY_ITEM_ID) ?? {}),
+    Object.entries(globalThis.localStorage.getItem(REGISTRY_ITEM_ID) ?? {}),
   );
 
   if (savedEntries.has(pubkey)) {
