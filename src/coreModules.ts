@@ -12,11 +12,7 @@ const CORE_MODULES = {
 };
 
 export async function networkReady() {
-  for (const module of [
-    CORE_MODULES.peerDiscoveryRegistry,
-    CORE_MODULES.ircPeerDiscovery,
-    CORE_MODULES.swarm,
-  ]) {
+  for (const module of [CORE_MODULES.swarm]) {
     if (!moduleLoaded(module)) {
       return false;
     }
