@@ -8,6 +8,7 @@ const CORE_MODULES = {
   ircPeerDiscovery:
     "zdiN5eJ3RfHpZHTYorGxBt1GCsrGJYV9GprwVWkj8snGsjWSrptFm8BtQX",
   s5: "zdiT6quMF8gh8BhQdXE7CZYhp8S1BxSgsucSS48WuTGdars1noejvak6Qo",
+  networkRegistry: "zdiVGkiECt8CT7psN5wsQyNHewyRJLjPhAGwYGTRXPyAPXP21bdupzHyaw",
 };
 
 export async function networkReady() {
