@@ -45,6 +45,7 @@ interface OpenQuery {
   dest: Worker;
   nonce: string;
   origin: string;
+  sw?: boolean;
 }
 
 export interface OpenQueryResponse {
@@ -52,6 +53,7 @@ export interface OpenQueryResponse {
   method: string;
   data: any;
   err?: any;
+  sw?: boolean;
 }
 
 // Define the stateful variables for managing the modules. We track the set of
@@ -464,6 +466,7 @@ async function handleModuleCall(
       dest: worker,
       nonce: event.data.nonce,
       origin: event.origin,
+      sw: event.data.sw,
     } as OpenQuery;
 
     // Send the message to the worker to start the query.
@@ -667,6 +670,7 @@ function handleModuleResponse(
     nonce: sourceNonce,
     method: event.data.method,
     data: event.data.data,
+    sw: event.data.sw,
   };
   // For responses only, set an error and close out the query by deleting it
   // from the query map.
@@ -701,6 +705,7 @@ function handleQueryUpdate(event: MessageEvent) {
     nonce: event.data.nonce,
     method: event.data.method,
     data: event.data.data,
+    sw: event.data.sw,
   });
 }
 
