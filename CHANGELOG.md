@@ -1,3 +1,17 @@
+# [0.1.0-develop.15](https://git.lumeweb.com/LumeWeb/kernel/compare/v0.1.0-develop.14...v0.1.0-develop.15) (2023-09-11)
+
+
+### Bug Fixes
+
+* pass the fullBytes of the hash, and return the CID in string form with fromRegistry ([2d61697](https://git.lumeweb.com/LumeWeb/kernel/commit/2d616979c3249c7c0d9c3da1574ce9ca22352405))
+* use globalThis ([23c2848](https://git.lumeweb.com/LumeWeb/kernel/commit/23c2848683ab6ce5c8e2b46c04f0b5f5ae7d3234))
+* use globalThis ([b6142a6](https://git.lumeweb.com/LumeWeb/kernel/commit/b6142a654d3040baa18bfae7caa2f4db5aa458c0))
+
+
+### Features
+
+* add service worker support ([1524ff5](https://git.lumeweb.com/LumeWeb/kernel/commit/1524ff5c57df1b7e1c88df52c6c1c0d4851dfc15))
+
 # [0.1.0-develop.14](https://git.lumeweb.com/LumeWeb/kernel/compare/v0.1.0-develop.13...v0.1.0-develop.14) (2023-09-08)
 
 # [0.1.0-develop.13](https://git.lumeweb.com/LumeWeb/kernel/compare/v0.1.0-develop.12...v0.1.0-develop.13) (2023-09-04)
