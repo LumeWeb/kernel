@@ -6,6 +6,7 @@ import {
   addContextToErr,
   bufToB64,
   encodeU64,
+  equalBytes,
   Err,
   objAsString,
   sha512,
@@ -16,7 +17,12 @@ import type { moduleQuery, presentKeyData } from "@lumeweb/libkernel/module";
 import { defer } from "@lumeweb/libkernel/module";
 import { readableStreamToUint8Array } from "binconv";
 import { getSavedRegistryEntry } from "./registry.js";
-import { networkReady, resolveModuleRegistryEntry } from "./coreModules.js";
+import {
+  networkReady,
+  resolveModuleRegistryEntry,
+  store as moduleStore,
+} from "./modules.js";
+import { blake3 } from "@noble/hashes/blake3";
 
 // WorkerLaunchFn is the type signature of the function that launches the
 // worker to set up for processing a query.
@@ -214,17 +220,9 @@ function handleWorkerMessage(event: MessageEvent, mod: Module, worker: Worker) {
 // createModule will create a module from the provided worker code and domain.
 // This call does not launch the worker, that should be done separately.
 async function createModule(
-  workerCode: Uint8Array | ReadableStream,
+  workerCode: Uint8Array,
   domain: string,
 ): Promise<[Module | null, Err]> {
-  if (workerCode instanceof ReadableStream) {
-    try {
-      workerCode = await readableStreamToUint8Array(workerCode);
-    } catch (e) {
-      return [null, e];
-    }
-  }
-
   // Generate the URL for the worker code.
   const url = URL.createObjectURL(new Blob([workerCode]));
 
@@ -526,18 +524,33 @@ async function handleModuleCall(
   // Fetch the module in a background thread, and launch the query once the
   // module is available.
   modulesLoading[moduleDomain] = new Promise(async (resolve) => {
-    // TODO: Check localStorage for the module.
-
-    let moduleData;
+    let cachedModule: Uint8Array | undefined;
 
     try {
-      moduleData = await downloadSmallObject(finalModule);
-    } catch (e) {
-      const err = addContextToErr(e, "unable to load module");
-      respondErr(event, messagePortal, isWorker, isInternal, err);
-      resolve(err);
-      delete modulesLoading[moduleDomain];
-      return;
+      cachedModule = await (await moduleStore()).get(finalModule);
+    } catch {}
+
+    let moduleData: ReadableStream<Uint8Array> | Uint8Array | undefined;
+
+    if (cachedModule) {
+      const hash = CID.decode(finalModule).hash.hashBytes;
+      if (!equalBytes(hash, blake3(cachedModule))) {
+        logErr("corrupt module found in store: ", finalModule);
+      } else {
+        moduleData = cachedModule;
+      }
+    }
+
+    if (!moduleData) {
+      try {
+        moduleData = await downloadSmallObject(finalModule);
+      } catch (e) {
+        const err = addContextToErr(e, "unable to load module");
+        respondErr(event, messagePortal, isWorker, isInternal, err);
+        resolve(err);
+        delete modulesLoading[moduleDomain];
+        return;
+      }
     }
 
     // The call to download the skylink is async. That means it's possible that
@@ -559,9 +572,20 @@ async function handleModuleCall(
       return;
     }
 
-    // TODO: Save the result to localStorage. Can't do that until
-    // subscriptions are in place so that localStorage can sync
-    // with any updates from the remote module.
+    if (moduleData instanceof ReadableStream) {
+      try {
+        moduleData = await readableStreamToUint8Array(moduleData);
+      } catch (e) {
+        respondErr(event, messagePortal, isWorker, isInternal, e);
+        resolve(e);
+        delete modulesLoading[moduleDomain];
+        return;
+      }
+    }
+
+    if (!cachedModule) {
+      await (await moduleStore()).put(finalModule, moduleData);
+    }
 
     // Create a new module.
     const [mod, errCM] = await createModule(moduleData, moduleDomain);

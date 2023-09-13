@@ -1,5 +1,8 @@
 import { internalModuleCall, modules } from "./queries.js";
 import { CID, SignedRegistryEntry } from "@lumeweb/libs5";
+import { Level } from "level";
+
+let moduleStore: Level<string, Uint8Array>;
 
 const CORE_MODULES = {
   swarm: "zdiLmwHCC15afFNLYzzT2DVV7m27SrBde7oXHdSzAe95GpFZXzdpatUN6b",
@@ -38,4 +41,23 @@ export async function resolveModuleRegistryEntry(module: string) {
   )) as SignedRegistryEntry;
 
   return CID.fromRegistry(signedEntry.data).toString();
+}
+
+async function initStore() {
+  if (moduleStore) {
+    return;
+  }
+
+  const db = new Level<string, Uint8Array>("kernel-module-store");
+  await db.open();
+
+  moduleStore = db;
+}
+
+export async function store() {
+  if (!moduleStore) {
+    await initStore();
+  }
+
+  return moduleStore;
 }
