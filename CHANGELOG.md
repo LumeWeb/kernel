@@ -1,3 +1,10 @@
+# [0.1.0-develop.16](https://git.lumeweb.com/LumeWeb/kernel/compare/v0.1.0-develop.15...v0.1.0-develop.16) (2023-09-11)
+
+
+### Bug Fixes
+
+* need to use query not event ([10eb4a9](https://git.lumeweb.com/LumeWeb/kernel/commit/10eb4a990e333b1ef5bed05b0fbb2908d432569b))
+
 # [0.1.0-develop.15](https://git.lumeweb.com/LumeWeb/kernel/compare/v0.1.0-develop.14...v0.1.0-develop.15) (2023-09-11)
 
 
