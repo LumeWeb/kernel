@@ -1,3 +1,10 @@
+# [0.1.0-develop.17](https://git.lumeweb.com/LumeWeb/kernel/compare/v0.1.0-develop.16...v0.1.0-develop.17) (2023-09-13)
+
+
+### Features
+
+* add cached modules support with leveldb/indexeddb ([6e148c1](https://git.lumeweb.com/LumeWeb/kernel/commit/6e148c1e0a761ac1b253074c150b61d356285560))
+
 # [0.1.0-develop.16](https://git.lumeweb.com/LumeWeb/kernel/compare/v0.1.0-develop.15...v0.1.0-develop.16) (2023-09-11)
 
 
