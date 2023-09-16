@@ -1,3 +1,10 @@
+# [0.1.0-develop.18](https://git.lumeweb.com/LumeWeb/kernel/compare/v0.1.0-develop.17...v0.1.0-develop.18) (2023-09-16)
+
+
+### Bug Fixes
+
+* need to pass sw property back with responseNonce ([265d955](https://git.lumeweb.com/LumeWeb/kernel/commit/265d95579550757c7d7e9d4a9b23f6690dbd2c29))
+
 # [0.1.0-develop.17](https://git.lumeweb.com/LumeWeb/kernel/compare/v0.1.0-develop.16...v0.1.0-develop.17) (2023-09-13)
 
 
