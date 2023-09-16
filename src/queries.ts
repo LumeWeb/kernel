@@ -485,6 +485,7 @@ async function handleModuleCall(
         data: {
           nonce,
         },
+        sw: event.data.sw,
       };
       if (isWorker) {
         messagePortal.postMessage(msg);
