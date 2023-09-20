@@ -23,10 +23,11 @@ import {
   store as moduleStore,
 } from "./modules.js";
 import { blake3 } from "@noble/hashes/blake3";
+import Worker from "./worker.js";
 
 // WorkerLaunchFn is the type signature of the function that launches the
 // worker to set up for processing a query.
-type WorkerLaunchFn = () => [Worker, Err];
+type WorkerLaunchFn = () => Promise<[Worker, Err]>;
 
 // modules is a hashmap that maps from a domain to the module that handles
 // queries to that domain. It maintains the domain and URL of the module so
@@ -36,7 +37,7 @@ type WorkerLaunchFn = () => [Worker, Err];
 // a new worker gets launched for every query.
 interface Module {
   domain: string;
-  url: string;
+  code: Uint8Array;
   launchWorker: WorkerLaunchFn;
   worker?: Worker;
 }
@@ -223,20 +224,16 @@ async function createModule(
   workerCode: Uint8Array,
   domain: string,
 ): Promise<[Module | null, Err]> {
-  // Generate the URL for the worker code.
-  const url = URL.createObjectURL(new Blob([workerCode]));
-
   // Create the module object.
   const mod: Module = {
     domain,
-    url,
-    launchWorker: function (): [Worker, Err] {
+    code: workerCode,
+    launchWorker: function (): Promise<[Worker, Err]> {
       return launchWorker(mod);
     },
   };
-
   // Start worker
-  const [worker, err] = mod.launchWorker();
+  const [worker, err] = await mod.launchWorker();
   if (err !== null) {
     return [{} as Module, addContextToErr(err, "unable to launch worker")];
   }
@@ -247,11 +244,12 @@ async function createModule(
 
 // launchWorker will launch a worker and perform all the setup so that the
 // worker is ready to receive a query.
-function launchWorker(mod: Module): [Worker, Err] {
+async function launchWorker(mod: Module): Promise<[Worker, Err]> {
   // Create and launch the worker.
   let worker: Worker;
   try {
-    worker = new Worker(mod.url);
+    worker = new Worker(mod.code, CID.decode(mod.domain));
+    await worker.ready;
   } catch (err: any) {
     logErr("worker", mod.domain, "unable to create worker", mod.domain, err);
     return [
@@ -259,6 +257,9 @@ function launchWorker(mod: Module): [Worker, Err] {
       addContextToErr(objAsString(err), "unable to create worker"),
     ];
   }
+
+  // clean up memory, we don't need the code anymore
+  mod.code = new Uint8Array();
 
   // Set the onmessage and onerror functions.
   worker.onmessage = function (event: MessageEvent) {
@@ -321,7 +322,6 @@ async function handleModuleCall(
     );
     return;
   }
-
   let validCid = false;
   let isResolver = false;
   if (
@@ -588,8 +588,12 @@ async function handleModuleCall(
       await (await moduleStore()).put(finalModule, moduleData);
     }
 
+    if (!(moduleData instanceof Uint8Array)) {
+      moduleData = new TextEncoder().encode(moduleData);
+    }
+
     // Create a new module.
-    const [mod, errCM] = await createModule(moduleData, moduleDomain);
+    const [mod, errCM] = await createModule(moduleData, finalModule);
     if (errCM !== null) {
       const err = addContextToErr(errCM, "unable to create module");
       respondErr(event, messagePortal, isWorker, isInternal, err);

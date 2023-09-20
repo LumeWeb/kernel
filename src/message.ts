@@ -11,6 +11,10 @@ export const handleIncomingMessage = function (event: any) {
     return;
   }
 
+  if (event.origin.endsWith(".module.kernel.lumeweb.com")) {
+    return;
+  }
+
   // Input validation.
   if (!("method" in event.data)) {
     logErr("handleIncomingMessage", "kernel request is missing 'method' field");
