@@ -1,3 +1,10 @@
+# [0.1.0-develop.19](https://git.lumeweb.com/LumeWeb/kernel/compare/v0.1.0-develop.18...v0.1.0-develop.19) (2023-09-20)
+
+
+### Features
+
+* change workers to use a dedicated iframe that for now is hosted. This should unlock a dedicated thread per worker and prevent cpu fighting ([cfeca11](https://git.lumeweb.com/LumeWeb/kernel/commit/cfeca113007e6d3c331ebed64bfbc300cb441f0a))
+
 # [0.1.0-develop.18](https://git.lumeweb.com/LumeWeb/kernel/compare/v0.1.0-develop.17...v0.1.0-develop.18) (2023-09-16)
 
 
