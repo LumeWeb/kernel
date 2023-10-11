@@ -13,8 +13,8 @@ const DEFAULT_MODULE_REGISTRY = new Map<string, string>(
     zdiT6quMF8gh8BhQdXE7CZYhp8S1BxSgsucSS48WuTGdars1noejvak6Qo:
       "z2H734ocqpAoorkhUk3nymFuwS6uU6YcBUppCU7YvBiasRvsbJ6E",
     // networkRegistry
-    zdiVGkiECt8CT7psN5wsQyNHewyRJLjPhAGwYGTRXPyAPXP21bdupzHyaw:
-      "zduJ5pr1MuPbfodPoRaEbQ65AScrAm5YmroChEsT8ACpGp23qoWnTcHp47",
+    zrjTCwTcK5Vco1h7cdUQKzs6yzeqm7vC5u5Lo9y1uhTyxnv:
+      "z2H72sYWs426LVZP37w3cBhHJ8tML3TNT8gqjCHLL7z1nNvZoi6b",
   }),
 );
 const REGISTRY_ITEM_ID = "registry";
