@@ -7,14 +7,14 @@ const DEFAULT_MODULE_REGISTRY = new Map<string, string>(
     zdiLW9MtAAMssP5vLBgd1FitouiVXzNUYZszFYG44uVKqCPDqUQox9aq1y:
       "zduTMSXg16HNi4ggDz8uko7ZxX7q9yosGBT8MX2ng43epttTEQ3Xi7pr2B",
     // ircPeerDiscovery
-    zdiN5eJ3RfHpZHTYorGxBt1GCsrGJYV9GprwVWkj8snGsjWSrptFm8BtQX:
-      "zduGKansawKCn6Uzr9sPKVbVkdJCgUVL1mizy38t7tHvUxfEGQMC14R3EP",
+    zrjPHvVJ3j7Jfn834PV4n7KcWbSW7ZHkxvcPCKWjwAcjPX5:
+      "zHnoaikfFJ9T5hEhV53bj8h5U5qgZrocCbfmTkogqGdaMkjLiE",
     // s5
     zdiT6quMF8gh8BhQdXE7CZYhp8S1BxSgsucSS48WuTGdars1noejvak6Qo:
       "z2H734ocqpAoorkhUk3nymFuwS6uU6YcBUppCU7YvBiasRvsbJ6E",
     // networkRegistry
     zrjTCwTcK5Vco1h7cdUQKzs6yzeqm7vC5u5Lo9y1uhTyxnv:
-      "z2H72sYWs426LVZP37w3cBhHJ8tML3TNT8gqjCHLL7z1nNvZoi6b",
+      "z2H7J3strfaEAc1kyHqMNmEPzynRipVerfCeqEhfkkcrGNNhnJUo",
   }),
 );
 const REGISTRY_ITEM_ID = "registry";
