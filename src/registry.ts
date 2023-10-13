@@ -4,8 +4,8 @@ const DEFAULT_MODULE_REGISTRY = new Map<string, string>(
     zdiLmwHCC15afFNLYzzT2DVV7m27SrBde7oXHdSzAe95GpFZXzdpatUN6b:
       "zduLvD6fRRmCy97T6RweYaPTxHdwFJmvmoygB4hCu3sJnZjHiYCKke4cG7",
     // peerDiscoveryRegistry
-    zdiLW9MtAAMssP5vLBgd1FitouiVXzNUYZszFYG44uVKqCPDqUQox9aq1y:
-      "zduTMSXg16HNi4ggDz8uko7ZxX7q9yosGBT8MX2ng43epttTEQ3Xi7pr2B",
+    zrjD6CEchDtSex5VHjzMNSAdkJpMNfCtbxSnftgtfvtnsdY:
+      "z2H7AhnortTD6wL53XUdTotJZLADa7PbZCcHuSFJ6WgZ6td2bvaC",
     // ircPeerDiscovery
     zrjPHvVJ3j7Jfn834PV4n7KcWbSW7ZHkxvcPCKWjwAcjPX5:
       "zHnoaikfFJ9T5hEhV53bj8h5U5qgZrocCbfmTkogqGdaMkjLiE",
