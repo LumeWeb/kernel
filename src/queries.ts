@@ -37,6 +37,7 @@ type WorkerLaunchFn = () => Promise<[Worker, Err]>;
 // a new worker gets launched for every query.
 interface Module {
   domain: string;
+  resolvedDomain: string;
   code: Uint8Array;
   launchWorker: WorkerLaunchFn;
   worker?: Worker;
@@ -223,10 +224,12 @@ function handleWorkerMessage(event: MessageEvent, mod: Module, worker: Worker) {
 async function createModule(
   workerCode: Uint8Array,
   domain: string,
+  resolvedDomain: string,
 ): Promise<[Module | null, Err]> {
   // Create the module object.
   const mod: Module = {
     domain,
+    resolvedDomain,
     code: workerCode,
     launchWorker: function (): Promise<[Worker, Err]> {
       return launchWorker(mod);
@@ -248,7 +251,7 @@ async function launchWorker(mod: Module): Promise<[Worker, Err]> {
   // Create and launch the worker.
   let worker: Worker;
   try {
-    worker = new Worker(mod.code, CID.decode(mod.domain));
+    worker = new Worker(mod.code, CID.decode(mod.resolvedDomain));
     await worker.ready;
   } catch (err: any) {
     logErr("worker", mod.domain, "unable to create worker", mod.domain, err);
@@ -593,7 +596,11 @@ async function handleModuleCall(
     }
 
     // Create a new module.
-    const [mod, errCM] = await createModule(moduleData, finalModule);
+    const [mod, errCM] = await createModule(
+      moduleData,
+      moduleDomain,
+      finalModule,
+    );
     if (errCM !== null) {
       const err = addContextToErr(errCM, "unable to create module");
       respondErr(event, messagePortal, isWorker, isInternal, err);
