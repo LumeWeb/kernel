@@ -5,10 +5,10 @@ import { Level } from "level";
 let moduleStore: Level<string, Uint8Array>;
 
 const CORE_MODULES = {
-  swarm: "zdiLmwHCC15afFNLYzzT2DVV7m27SrBde7oXHdSzAe95GpFZXzdpatUN6b",
+  swarm: "zrjTDyEX8Mh2PdDdRj5YL2byFGrYe1ksczRwPaTRFaCGSMG",
   peerDiscoveryRegistry: "zrjD6CEchDtSex5VHjzMNSAdkJpMNfCtbxSnftgtfvtnsdY",
-  ircPeerDiscovery: "zrjPHvVJ3j7Jfn834PV4n7KcWbSW7ZHkxvcPCKWjwAcjPX5",
-  s5: "zdiT6quMF8gh8BhQdXE7CZYhp8S1BxSgsucSS48WuTGdars1noejvak6Qo",
+  ircPeerDiscovery: "zrjHTx8tSQFWnmZ9JzK7XmJirqJQi2WRBLYp3fASaL2AfBQ",
+  s5: "zrjLjKVByzt233rfcjWvTQXrMfGFa11oBLydPaUk7gwnC2d",
   networkRegistry: "zrjTCwTcK5Vco1h7cdUQKzs6yzeqm7vC5u5Lo9y1uhTyxnv",
 };
 
