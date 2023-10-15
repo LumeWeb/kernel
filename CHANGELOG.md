@@ -1,3 +1,10 @@
+# [0.1.0-develop.22](https://git.lumeweb.com/LumeWeb/kernel/compare/v0.1.0-develop.21...v0.1.0-develop.22) (2023-10-15)
+
+
+### Bug Fixes
+
+* add resolvedDomain to Module type and use it instead in createModule so that the domain id stays consistent to the potential resolver version, when used as a callerDomain ([68642cc](https://git.lumeweb.com/LumeWeb/kernel/commit/68642ccb03fafb27662f51905ad628e70198b826))
+
 # [0.1.0-develop.21](https://git.lumeweb.com/LumeWeb/kernel/compare/v0.1.0-develop.20...v0.1.0-develop.21) (2023-10-13)
 
 # [0.1.0-develop.20](https://git.lumeweb.com/LumeWeb/kernel/compare/v0.1.0-develop.19...v0.1.0-develop.20) (2023-10-11)
