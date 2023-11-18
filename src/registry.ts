@@ -11,7 +11,7 @@ const DEFAULT_MODULE_REGISTRY = new Map<string, string>(
       "z2H7D35inXTkjuxevunyq7ojv1iomXJD1svDYgkLnknk2bXc14HC",
     // s5
     zrjLjKVByzt233rfcjWvTQXrMfGFa11oBLydPaUk7gwnC2d:
-      "z2H6yA5VLuVUukioBiSNYTBEMGBXHgV2uxcfppUnsSidZTwZHiWE",
+      "z2H74p9eZkzShhjfpmYLB4jpmi5qKZZHUku2eaAysWucMfcvDrpC",
     // networkRegistry
     zrjTCwTcK5Vco1h7cdUQKzs6yzeqm7vC5u5Lo9y1uhTyxnv:
       "z2H7J3strfaEAc1kyHqMNmEPzynRipVerfCeqEhfkkcrGNNhnJUo",
